@@ -1,0 +1,62 @@
+name: pawtner
+description: A smart animal welfare mobile application for pet safety and recovery
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  
+dependencies:
+  flutter:
+    sdk: flutter
+
+  image_picker: ^1.0.7
+  cupertino_icons: ^1.0.2
+  shared_preferences: ^2.2.2
+  intl: ^0.18.1
+  url_launcher: ^6.2.2
+  permission_handler: ^11.1.0
+  flutter_local_notifications: ^17.0.0
+  app_links: ^3.4.0
+  flutter_screenutil: ^5.9.0
+
+  # Firebase
+  firebase_core: ^4.6.0
+  firebase_auth: ^6.1.1
+  cloud_firestore: ^6.1.2
+  firebase_storage: ^13.0.3
+  firebase_messaging: ^16.0.3
+
+  google_generative_ai: ^0.4.7
+
+  # QR Code
+  qr_flutter: ^4.1.0
+  mobile_scanner: ^3.5.5
+
+  # Location
+  geolocator: ^10.1.0
+  google_maps_flutter: ^2.5.0
+  geocoding: ^2.1.1
+  http: ^1.6.0
+  share_plus: ^7.2.1
+  tflite_flutter: ^0.12.1
+  image: ^4.8.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+  flutter_lints: ^3.0.0
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/logo_new.png"
+
+flutter:
+  uses-material-design: true
+  
+  assets:
+    - assets/images/
+    - assets/models/
+    

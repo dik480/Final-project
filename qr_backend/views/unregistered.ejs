@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawtner - Register Pet</title>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; text-align: center; padding: 2rem; margin: 0; }
+        .container { max-width: 480px; margin: 0 auto; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); text-align: left; }
+        h1 { color: #0f172a; font-size: 1.5rem; margin-bottom: 0.5rem; text-align: center; }
+        p.subtitle { color: #64748b; line-height: 1.5; margin-bottom: 1.5rem; text-align: center; }
+        .logo { font-size: 3rem; margin-bottom: 0.5rem; color: #3b82f6; text-align: center; }
+        .form-group { margin-bottom: 1rem; }
+        label { display: block; font-weight: 500; margin-bottom: 0.25rem; color: #334155; font-size: 0.9rem; }
+        input[type="text"], input[type="email"], input[type="tel"], input[type="number"] { width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        .btn { display: block; width: 100%; box-sizing: border-box; background-color: #3b82f6; color: white; text-align: center; text-decoration: none; padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 600; font-size: 1rem; border: none; cursor: pointer; transition: background-color 0.2s; margin-top: 1.5rem; }
+        .btn:hover { background-color: #2563eb; }
+        .section-title { font-size: 1.1rem; color: #0f172a; margin-bottom: 1rem; margin-top: 1.5rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.5rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🐾</div>
+        <h1>Register New Pet</h1>
+        <p class="subtitle">Complete this form to link this QR code to your pet.</p>
+        
+        <form action="/pet/<%= qr_id %>/register" method="POST">
+            <div class="section-title">Pet Details</div>
+            <div class="form-group">
+                <label for="petName">Pet Name *</label>
+                <input type="text" id="petName" name="petName" required>
+            </div>
+            <div class="form-group">
+                <label for="breed">Breed</label>
+                <input type="text" id="breed" name="breed">
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" min="0" step="1">
+            </div>
+            <div class="form-group">
+                <label for="color">Color</label>
+                <input type="text" id="color" name="color">
+            </div>
+            
+            <div class="section-title">Owner Details</div>
+            <div class="form-group">
+                <label for="ownerName">Your Name *</label>
+                <input type="text" id="ownerName" name="ownerName" required>
+            </div>
+            <div class="form-group">
+                <label for="ownerPhone">Phone Number *</label>
+                <input type="tel" id="ownerPhone" name="ownerPhone" required>
+            </div>
+            <div class="form-group">
+                <label for="ownerEmail">Email Address</label>
+                <input type="email" id="ownerEmail" name="ownerEmail">
+            </div>
+            
+            <button type="submit" class="btn">Register Profile</button>
+        </form>
+    </div>
+</body>
+</html>

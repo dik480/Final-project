@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pet.name %>'s Profile | Pawtner</title>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; margin: 0; padding: 1rem; }
+        .container { max-width: 480px; margin: 2rem auto; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+        .header { text-align: center; margin-bottom: 2rem; }
+        .pet-image { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid #e2e8f0; margin: 0 auto 1rem; background-color: #cbd5e1; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+        h1 { margin: 0; color: #0f172a; font-size: 1.8rem; }
+        .pet-breed { color: #64748b; font-size: 0.9rem; margin-top: 0.25rem; }
+        .section { margin-bottom: 1.5rem; }
+        .section h2 { font-size: 1.1rem; color: #334155; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.5rem; margin-bottom: 1rem; }
+        .info-row { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+        .info-label { color: #64748b; font-weight: 500; }
+        .info-value { color: #0f172a; font-weight: 600; text-align: right; }
+        .emergency-instructions { background-color: #fef2f2; border: 1px solid #fecaca; padding: 1rem; border-radius: 8px; color: #991b1b; font-size: 0.95rem; line-height: 1.5; }
+        .btn-share { display: block; width: 100%; box-sizing: border-box; background-color: #ef4444; color: white; text-align: center; text-decoration: none; padding: 1rem; border-radius: 8px; font-weight: 600; font-size: 1.1rem; border: none; cursor: pointer; transition: background-color 0.2s; margin-top: 2rem; }
+        .btn-share:hover { background-color: #dc2626; }
+        .btn-share:disabled { background-color: #fca5a5; cursor: not-allowed; }
+        .status-msg { margin-top: 1rem; text-align: center; font-size: 0.9rem; font-weight: 500; }
+        .success { color: #16a34a; }
+        .error { color: #dc2626; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <% if (pet.photo_url) { %>
+                <img src="<%= pet.photo_url %>" alt="<%= pet.name %>" class="pet-image">
+            <% } else { %>
+                <div class="pet-image">🐾</div>
+            <% } %>
+            <h1><%= pet.name %></h1>
+            <div class="pet-breed"><%= pet.breed || 'Mixed Breed' %> • <%= pet.age || 'Unknown age' %></div>
+        </div>
+
+        <div class="section">
+            <h2>Owner Contact Info</h2>
+            <div class="info-row">
+                <span class="info-label">Name</span>
+                <span class="info-value"><%= owner.name %></span>
+            </div>
+            <% if (owner.phone) { %>
+            <div class="info-row">
+                <span class="info-label">Phone</span>
+                <span class="info-value"><a href="tel:<%= owner.phone %>" style="color: #3b82f6;"><%= owner.phone %></a></span>
+            </div>
+            <% } %>
+        </div>
+
+        <% if (pet.emergency_instructions) { %>
+        <div class="section">
+            <h2>Emergency Instructions</h2>
+            <div class="emergency-instructions">
+                <%= pet.emergency_instructions %>
+            </div>
+        </div>
+        <% } %>
+
+        <button id="shareLocationBtn" class="btn-share">📍 Share Live Location</button>
+        <div id="statusMsg" class="status-msg"></div>
+    </div>
+
+    <script>
+        document.getElementById('shareLocationBtn').addEventListener('click', () => {
+            const btn = document.getElementById('shareLocationBtn');
+            const msg = document.getElementById('statusMsg');
+            
+            btn.disabled = true;
+            btn.innerText = 'Locating...';
+            msg.innerText = '';
+            msg.className = 'status-msg';
+
+            if (!navigator.geolocation) {
+                showError('Geolocation is not supported by your browser.');
+                return;
+            }
+
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    sendLocation(position.coords.latitude, position.coords.longitude);
+                },
+                (error) => {
+                    showError('Unable to retrieve your location. Check permissions.');
+                }
+            );
+
+            function sendLocation(lat, lng) {
+                btn.innerText = 'Sending...';
+                
+                fetch('/api/share-location', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        qr_id: '<%= qr_id %>',
+                        lat: lat,
+                        lng: lng
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        msg.innerText = data.message;
+                        msg.classList.add('success');
+                        btn.innerText = 'Location Shared';
+                    } else {
+                        showError(data.error || 'Failed to share location.');
+                    }
+                })
+                .catch(err => {
+                    showError('Network error while sharing location.');
+                });
+            }
+
+            function showError(text) {
+                btn.disabled = false;
+                btn.innerText = '📍 Share Live Location';
+                msg.innerText = text;
+                msg.classList.add('error');
+            }
+        });
+    </script>
+</body>
+</html>
