@@ -16,7 +16,7 @@ This project helps locate lost pets using QR codes and image recognition, and co
 ```bash
 git clone https://github.com/dik480/Final-project.git
 
- 2. Navigate to Project Folder
+### 2. Navigate to Project Folder
 cd pawtner_app
 
 3. Install Flutter Dependencies
