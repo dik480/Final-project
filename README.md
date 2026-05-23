@@ -46,7 +46,7 @@ This project helps locate lost pets using QR codes and image recognition, and co
 
        android/app/src/main/AndroidManifest.xml
 
-    Add your API key inside:
+Add your API key inside:
 
       <meta-data
       android:name="com.google.android.geo.API_KEY"
