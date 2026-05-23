@@ -12,36 +12,52 @@ This project helps locate lost pets using QR codes and image recognition, and co
 
 ## Installation and setup
 1. Clone the Repository
-git clone https://github.com/dik480/Final-project.git
+   
+    git clone https://github.com/dik480/Final-project.git
 
-2. Navigate to Project Folder
-cd pawtner_app
+3. Navigate to Project Folder
+   
+   cd pawtner_app
 
-3. Install Flutter Dependencies
+5. Install Flutter Dependencies
 
-4. Configure Firebase
--Create a Firebase project
--Add Android app in Firebase Console
--Download google-services.json
--Place it inside:android/app/
+6. Configure Firebase
+   
+    -Create a Firebase project
+  
+    -Add Android app in Firebase Console
+  
+    -Download google-services.json
+  
+    -Place it inside:android/app/
 
-5. Enable Firebase Services
-  Enable:
-    -Authentication
-    -Cloud Firestore
-    -Firebase Storage
-6. Add Google Maps API Key
-Open:
-android/app/src/main/AndroidManifest.xml
+8. Enable Firebase Services
+
+    Enable:
+   
+      -Authentication
+
+      -Cloud Firestore
+
+      -Firebase Storage
+10. Add Google Maps API Key
+
+    Open:
+
+       android/app/src/main/AndroidManifest.xml
+
 Add your API key inside:
-<meta-data
-    android:name="com.google.android.geo.API_KEY"
-    android:value="YOUR_API_KEY"/>
 
-7. Run the Application
+      <meta-data
+      android:name="com.google.android.geo.API_KEY"
+      android:value="YOUR_API_KEY"/>
+
+11. Run the Application
 
 ## Author
 Dikshant Shrestha
+
 Final year project
+
 Pawtner-An animal welfare application
 
