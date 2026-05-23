@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 # Pawtner App
 
 A Flutter-based Animal Welfare Application.
@@ -19,8 +17,3 @@ This is a Flutter project.
 ## Author
 Dikshant Shrestha
 
-git pull origin main --allow-unrelated-histories# Final-project
-
-=======
-# Final-project
->>>>>>> 9659cb82d797d3f40463f89376fdb344b22c8a4d
